@@ -1,0 +1,27 @@
+server:
+  port: 8085
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+  application:
+    name: microservice-provider-user
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+eureka:
+  client:
+    healthcheck: 
+      enabled: true
+    serviceUrl:
+      defaultZone: http://moclick:123456@localhost:8761/eureka
+  instance: 
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance-id:${server.port}}
